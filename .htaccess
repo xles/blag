@@ -1,0 +1,14 @@
+RewriteEngine on
+RewriteBase /blag
+#RewriteBase /
+
+RewriteCond $1 !^(index|test\.php|images|robots\.txt|todo.html)
+RewriteCond $1 !^(ai/(.*))
+RewriteCond $1 !^(src/(.*))
+RewriteCond $1 !^(templates/(.*))
+#RewriteCond $1 !^(ads/(.*))
+#RewriteCond %{REQUEST_FILENAME} -f [OR]
+#RewriteCond %{REQUEST_FILENAME} -d
+
+RewriteRule ^(.*)$ index.php/$1 [L]
+
