@@ -89,7 +89,7 @@ class Import {
 				break;
 			case 'lib': /* library directory */
 				$dir[0] = 'libraries';
-				$this->parse_lib($dir);
+				$this->parse_path($dir, '.php');
 				break;
 			case 'loc': /* locale directory */
 				$dir[0] = 'locales';
@@ -117,7 +117,7 @@ class Import {
 				$this->include_r($path);
 				return TRUE;
 			}
-			$path .= DS.$element;
+			$path .= '/'.$element;
 		}
 		$path .= $ext;
 		
@@ -142,7 +142,7 @@ class Import {
 	{
 		$path = ROOT;
 		foreach($dir as $element) {
-			$path .= DS.$element;
+			$path .= '/'.$element;
 		}
 		$path .= '.ini';
 		
@@ -162,16 +162,16 @@ class Import {
 	private function parse_tpl($dir = array())
 	{
 		$file = $dir[count($dir)-1].'.html';
-		$path = DS;
+		$path = '/';
 		
 		for($i=1;$i<count($dir)-1;$i++) {
-			$path .= $dir[$i].DS;
+			$path .= $dir[$i].'/';
 		}
 
 		$config = Config::get_instance('look_and_feel');
-		$pri = ROOT.DS.'templates'.DS.$config->get('template').$path.$file;
-		$sec = ROOT.DS.'templates'.DS.'system'.$path.$file;
-		$tri = ROOT.$path.'views'.DS.'tpl'.DS.$file;
+		$pri = ROOT.'/templates/'.$config->get('template').$path.$file;
+		$sec = ROOT.'/templates/system'.$path.$file;
+		$tri = ROOT.$path.'views/tpl/'.$file;
 		
 		if(file_exists($pri)) {
 			include_once($pri);

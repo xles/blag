@@ -32,7 +32,9 @@ class PasswordHash {
 
 	function PasswordHash($iteration_count_log2, $portable_hashes)
 	{
-		$this->itoa64 = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+		$this->itoa64 = './0123456789'
+			.'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+			.'abcdefghijklmnopqrstuvwxyz';
 
 		if ($iteration_count_log2 < 4 || $iteration_count_log2 > 31)
 			$iteration_count_log2 = 8;
@@ -246,8 +248,10 @@ class PasswordHash {
 		if ($hash[0] == '*')
 			$hash = crypt($password, $stored_hash);
 
-		return $hash == $stored_hash;
+		if($hash == $stored_hash)
+			return TRUE;
+		else
+			return FALSE;
+
 	}
 }
-
-?>

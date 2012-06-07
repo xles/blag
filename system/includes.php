@@ -17,16 +17,17 @@ use MagicPotion\Helper;
  */
 
 #Helper::import('inc.factory');
-Helper::import('inc.error');
-Helper::import('inc.logger');
-Helper::import('inc.config');
-Helper::import('inc.database');
-Helper::import('inc.session');
-Helper::import('inc.locale');
-Helper::import('inc.router');
-Helper::import('inc.rewrite');
-Helper::import('inc.template');
-Helper::import('inc.auth');
+import('inc.error');
+import('inc.logger');
+import('inc.config');
+import('inc.database');
+import('inc.session');
+import('inc.locale');
+import('inc.router');
+import('inc.rewrite');
+import('inc.template');
+import('inc.auth');
+
 #Helper::import('inc.builder');
 #Helper::import('inc.upload');
 #Helper::import('inc.syndication');

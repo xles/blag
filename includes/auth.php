@@ -28,6 +28,10 @@ define('ACCESS_ADMIN',		6);
 define('ACCESS_SUPER_USER',	7);
 /**#@-*/
 
+import('lib.phpass.PasswordHash');
+/**
+ * Auth class
+ */
 class Auth {
 
 /**
@@ -50,6 +54,7 @@ class Auth {
 		$this->db->table = 'users';
 		$this->lang = new Locale();
 		$this->lang->set_component('user');
+		
 	}
 
 /**
@@ -340,6 +345,30 @@ class Auth {
 		}
 	}
 
+	public function bcrypt($str)
+	{
+		$bcrypt = new \PasswordHash(8,FALSE);
+		return $bcrypt->HashPassword($str);
+	}
+
+	public function check_passwd($passwd)
+	{
+		if(!$this->session->get('UID'))
+			return FALSE;
+
+		$bcrypt = new PasswordHash(8,FALSE);
+		
+		$id = $this->session->get('UID');
+		$db = $this->db->select(array('passwd'),$id);
+
+		if ($bcrypt->CheckPassword($passwd, $db['passwd'])) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
+/*
 	public function check_passwd($passwd)
 	{
 		if(!$this->session->get('UID'))
@@ -353,6 +382,7 @@ class Auth {
 			return FALSE;
 		}
 	}
+*/
 
 /**
  * Destructor...

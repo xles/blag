@@ -14,12 +14,12 @@
 // </editor-fold>
 namespace MagicPotion;
 
-include_once(ROOT.DS.'system'.DS.'helper.php');
+//include_once(ROOT.'/system/helper.php');
 
-Helper::import('sys.defines');
-Helper::import('inc.config');
-Helper::import('inc.error');
-Helper::import('inc.logger');
+import('sys.defines');
+import('inc.config');
+import('inc.error');
+import('inc.logger');
 
 /**
  * Description of application
@@ -60,10 +60,10 @@ class MagicPotion {
 		/**
 		 * Including libraries.
 		 */
-		Helper::import('sys.controller');
-		Helper::import('sys.model');
-		Helper::import('sys.view');
-		Helper::import('sys.includes');
+		import('sys.controller');
+		import('sys.model');
+		import('sys.view');
+		import('sys.includes');
 
 		$config = Config::get_instance('look_and_feel');
 		$this->session = Session::get_instance();
@@ -77,9 +77,12 @@ class MagicPotion {
 		
 		$this->router = new Router();
 		
-		$tpl_path = 'templates'.DS.$config->get('template');
-		define('TPL_ROOT', ROOT.DS.$tpl_path);
-		define('TPL_BASE', BASEPATH.DS.$tpl_path);
+		$tpl_path = 'templates/'.$config->get('template');
+		define('TPL_ROOT', ROOT.DIRECTORY_SEPARATOR.$tpl_path);
+		define('TPL_BASE', BASEPATH.DIRECTORY_SEPARATOR.$tpl_path);
+
+		$this->session->set('UID', 1);
+		$this->session->set('USERNAME', 'xles');
 	}
 	
 	public function run()

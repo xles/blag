@@ -40,7 +40,7 @@ class Database {
 	function __construct()
 	{
 		$this->config = Config::get_instance('database');
-		Helper::import('inc.database.'.$this->config->get('vendor'));
+		import('inc.database.'.$this->config->get('vendor'));
 
 		$this->logger = Logger::get_instance();
 		$database = __NAMESPACE__.'\\Database\\'
