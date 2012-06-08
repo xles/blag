@@ -27,18 +27,17 @@ namespace MagicPotion;
 /**
  * 
  */
-class Template {
+class Template extends Object {
 	public $lang;
 
 	private $vars = array();
 
 	private $buffer;
-	private $logger;
 	private $uri;
 
 	public function __construct($file,$vars = array())
 	{
-		$this->logger = Logger::get_instance();
+		parent::__construct();
 		$this->vars = $vars;
 		
 		$this->get_file($file);
@@ -220,7 +219,7 @@ class Template {
 	}
 	private function find_tags($str)
 	{
-		$this->logger->log_line('Parsing tags');
+		$this->log->log_line('Parsing tags');
 
 		/**
 		 * Remove C-style comments...
@@ -247,7 +246,7 @@ class Template {
 		$str = preg_replace_callback ('/\{(.*?)\}/ism',
 			array($this, 'parse_tags'),$str);
 
-		$this->logger->log_line('Tags parsed');
+		$this->log->log_line('Tags parsed');
 
 		return $str;
 	}
@@ -256,7 +255,7 @@ class Template {
 	
 	private function get_file($file)
 	{
-		$this->logger->log_line('Loading '.$file.' to buffer');
+		$this->log->log_line('Loading '.$file.' to buffer');
 		$str = 'tpl'.str_replace('/', '.', $file);
 
 		try {
@@ -265,21 +264,21 @@ class Template {
 			$buffer = ob_get_contents();
 			ob_end_clean();
 			$this->buffer = $buffer;
-			$this->logger->log_ok();
+			$this->log->log_ok();
 		} catch(importException $e) {
-			$this->logger->log_fail();
+			$this->log->log_fail();
 		}
 	}
 	public function output()
 	{
 		$this->buffer = $this->find_tags($this->buffer);
-		$this->logger->log_line('Returned template buffer');
+		$this->log->log_line('Returned template buffer');
 		return $this->buffer;
 	}
 	public function render()
 	{
 		$this->buffer = $this->find_tags($this->buffer);
-		$this->logger->log_line('Printed template buffer');
+		$this->log->log_line('Printed template buffer');
 		if(print($this->buffer))
 			return TRUE;
 		else

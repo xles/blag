@@ -20,17 +20,14 @@ namespace MagicPotion;
 abstract class Model extends Object{
 	protected $db;
 	protected $uri;
-	protected $logger;
 	protected $lang;
-	protected $session;
 
 	public function __construct()
 	{
+		parent::__construct();
 		$this->db = new Database();
 		$this->uri = new Rewrite();
 		$this->lang = new Locale();
-		$this->logger = Logger::get_instance();
-		$this->session = Session::get_instance();
 	}
 }
 

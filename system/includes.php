@@ -17,6 +17,7 @@ use MagicPotion\Helper;
  */
 
 #import('inc.factory');
+import('inc.validate');
 import('inc.error');
 import('inc.logger');
 import('inc.config');

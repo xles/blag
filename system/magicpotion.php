@@ -116,7 +116,8 @@ class MagicPotion extends Object {
 		try {
 			$this->router->dispatch();
 		} catch (RouteNotFoundException $e) {
-			PageError::show('404', $url);
+			$this->show_error('400',$msg);
+			#PageError::show('404', $url);
 			$this->logger->log_line('404 Route not found');
 		} catch (componentNotFoundException $e) {
 			$msg = '400 Component "'.rtrim($e).'" not found';

@@ -32,23 +32,22 @@ import('lib.phpass.PasswordHash');
 /**
  * Auth class
  */
-class Auth {
+class Auth extends Object {
 
 /**
  * Database object.
  */
-	private $logger;
 	protected $db;
+	protected $validate;
 	public $uri;
 	public $lang;
-	public $session;
 /**
  * Constructor, connects class to the database upon creation of object.
  */
 	public function __construct()
 	{
-		$this->logger = Logger::get_instance();
-		$this->session = Session::get_instance();
+		parent::__construct();
+		$this->validate = new Validate();
 		$this->uri = new Rewrite();
 		$this->db = new Database();
 		$this->db->table = 'users';
@@ -76,7 +75,7 @@ class Auth {
 			$error[] = $this->lang->line('Username_in_use');
 		} 
 
-		if (!$this->check_email($email)) { 
+		if (!$this->validate->email($email)) { 
 			$error[] = $this->lang->line('Invalid_e-mail');
 		} 
 
@@ -158,7 +157,7 @@ class Auth {
 		if(!isset($email) || !isset($email))
 			$error[] = $this->lang->line('Empty_fields');
 
-		if (!$this->check_email($email)) {
+		if (!$this->validate->email($email)) {
 			$error[] = $this->lang->line('Invalid_e-mail');
 		}
 
@@ -195,8 +194,8 @@ class Auth {
 		if($db['access'] == ACCESS_BANNED)
 			$this->logout();
 
-		$this->logger->log_var($passwd,'$passwd');
-		$this->logger->log_var($db,'$db');
+		$this->log->log_var($passwd,'$passwd');
+		$this->log->log_var($db,'$db');
 		
 		if($db['passwd'] != $passwd)
 			$error[] = $this->lang->line('Wrong_password');
@@ -217,7 +216,7 @@ class Auth {
 		$this->session->set('UID', $db['user_id']);
 		$this->session->set('USERNAME', $user);
 		
-		$this->logger->log_var($_COOKIE,'$_COOKIE');
+		$this->log->log_var($_COOKIE,'$_COOKIE');
 		
 		if($save) {
 			$expire = time()+3600*24*30;
@@ -233,55 +232,6 @@ class Auth {
 		return session_destroy();
 	}
 	
-/**
- * Validate an email address.
- * 
- * Provide email address (raw input)
- * Returns true if the email address has the email 
- * address format and the domain exists.
- * 
- * @author	Douglas Lovell <email>
- * @copyright	Copyright (c) Douglas Lovell 2007
- */
-	private function check_email($email)
-	{
-		$atIndex = strrpos($email, "@");
-		if (is_bool($atIndex) &&!$atIndex) {
-			return FALSE;
-		} else {
-			$domain = substr($email, $atIndex+1);
-			$local = substr($email, 0, $atIndex);
-			$localLen = strlen($local);
-			$domainLen = strlen($domain);
-			if ($localLen < 1 || $localLen > 64) {
-				return FALSE;
-			} else if ($domainLen < 1 || $domainLen > 255) {
-				return FALSE;
-			} else if ($local[0] == '.' ||
-			 $local[$localLen-1] == '.') {
-				return FALSE;
-			} else if (preg_match('/\\.\\./', $local)) {
-				return FALSE;
-			} else if (!preg_match('/^[A-Za-z0-9\\-\\.]+$/',
-			 $domain)) {
-				return FALSE;
-			} else if (preg_match('/\\.\\./', $domain)) {
-				return FALSE;
-			} else if(!preg_match(
-			 '/^(\\\\.|[A-Za-z0-9!#%&`_=\\/$\'*+?^{}|~.-])+$/',
-			 str_replace("\\\\", "", $local))) {
-				if (!preg_match('/^"(\\\\"|[^"])+"$/',
-				 str_replace("\\\\", "", $local))) {
-					return FALSE;
-				}
-			}
-			if (!(checkdnsrr($domain, "MX") ||
-			 checkdnsrr($domain,"A"))) {
-				return FALSE;
-			}
-		}
-		return TRUE;
-	}
 	
 	private function check_username($username)
 	{
@@ -333,7 +283,7 @@ class Auth {
 		
 		$cond = 'WHERE user_id = '.$id;
 		$level = $this->db->select(array('access'),$cond);
-		$this->logger->log_var($level,'$level');
+		$this->log->log_var($level,'$level');
 		if($access) {
 			if ($level['access'] >= $access) {
 				return TRUE;

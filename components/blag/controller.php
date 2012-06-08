@@ -14,6 +14,7 @@
 // </editor-fold>
 namespace MagicPotion;
 
+import('com.blag.models.blag');
 import('com.blag.views.*');
 import('com.blag.models.*');
 /**
@@ -22,14 +23,16 @@ import('com.blag.models.*');
 class BlagController extends Controller {
 	public function &invoke()
 	{
-		/*
-		 * Register the component
-		 */
-		$this->component = 'Blag';
-		
+		/* Register the component */
+		$this->component('Blag');
+
 		$uri = $this->uri->parse_URL('controller/model/query');
 		
 		switch($uri['model']) {
+			case 'post':
+				$content = $this->post();
+				break;
+			case 'page':
 			default:
 				$content = $this->page();
 				break;
@@ -47,9 +50,32 @@ class BlagController extends Controller {
 	
 	private function page()
 	{
-		$model = $this->load_model(__FUNCTION__);
+		$m = $this->load_model(__FUNCTION__);
+		$v = $this->load_view(__FUNCTION__);
+		#$v->bind('method',print_r($m->list_posts(), true));
+		$v->bind('method',$m->get_username(1));
+		return $v->output();
+#		return $_SESSION['USERNAME'];
+	}
+	private function post()
+	{
+		switch($this->get_method()) {
+			case 'post':
+				$this->newpost();
+				break;
+			case 'get':
+				$this->getpost();
+				break;
+			case 'put':
+				$this->updatepost();
+				break;
+			case 'delete':
+				$this->removepost();
+				break;
+		}
+		#$model = $this->load_model(__FUNCTION__);
 		$view = $this->load_view(__FUNCTION__);
-		$view->set_var('method',$_SERVER['REQUEST_METHOD']);
+		$view->bind('method',$this->get_method());
 		return $view->output();
 #		return $_SESSION['USERNAME'];
 	}

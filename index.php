@@ -12,6 +12,7 @@
  * @todo make errors global.
  * @todo make config global.
  * @todo make an error page dispatch thingamaboober, that sets HTTP status.
+ * @todo consider a validation class. $validate->email($str);
  */
 namespace MagicPotion;
 
@@ -21,27 +22,20 @@ define('ROOT', str_replace('\\','/',dirname(__FILE__)));
 
 include(ROOT.'/system/core.php');
 
-#$logger = Logger::get_instance();
-#$logger->log_msg('Logger initiated');
-
-//$main = MagicPotion::get_instance();
-$main = new MagicPotion();
-#$logger->log_msg('Application instanciated, initiating');
-
 $main->init();
-#$logger->log_msg('Application initiated, routing');
+$log->log_msg('Application initiated, routing');
 
 $main->route();
-#$logger->log_msg('Application routed, dispatching');
+$log->log_msg('Application routed, dispatching');
 
 $main->dispatch();
-#$log->msg('Application dispatched, executing');
+$log->log_msg('Application dispatched, executing');
 
 $main->run();
-#$logger->log_msg('Application execution completed');
+$log->log_msg('Application execution completed');
 
 $main->__destruct();
-#$logger->debugger();
+$log->debugger();
 
 exit;
 /**

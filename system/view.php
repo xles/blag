@@ -6,15 +6,33 @@ namespace MagicPotion;
  */
 abstract class View extends Object {
 	protected $vars = array();
-	protected $logger;
 	protected $tpl;
 
-	public function __construct()
+	public function init($component, $model)
 	{
-		$this->logger = Logger::get_instance();
+		try {
+			$tpl = '/components/'.$component.'/'.$model;
+			$this->tpl = new Template($tpl);
+			$this->tpl->set_component($component, $model);
+		} catch(importException $e) {
+			$this->log->log_error($e);
+		}
 	}
 	
-	abstract public function output();	
+	public function bind($var, $val)
+	{
+		$this->tpl->set_tag($var, $val);
+	}
+
+	public function output()
+	{
+		return $this->tpl->output();
+	}
+
+	public function syndication()
+	{
+		return false;
+	}
 }
 
 /**

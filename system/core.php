@@ -97,10 +97,22 @@ function import($str)
 /**
  * Wrapper for the logger to make it global within the namespace.
  */
-function log_msg($str)
+function MPlog($str)
 {
-	
+	$log = Logger::get_instance();
+$log->log_msg('Logger initiated asd');
+	$log->log_line($str);
 }
+
+
+
+$log = Logger::get_instance();
+$log->log_msg('Logger initiated');
+
+//$main = MagicPotion::get_instance();
+
+$main = new MagicPotion();
+$log->log_msg('Application instanciated, initiating');
 
 /**
  * EOF /system/core.php
