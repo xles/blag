@@ -76,5 +76,5 @@ class Session {
 	}
 }
 /**
- * EOF /inc/session.php
+ * EOF /includes/session.php
  */

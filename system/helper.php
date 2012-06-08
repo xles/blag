@@ -58,7 +58,6 @@ class Helper {
 	}
 }
 
-
 /**
- * EOF /
+ * EOF /system/helper.php
  */

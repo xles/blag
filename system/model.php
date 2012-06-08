@@ -17,7 +17,7 @@ namespace MagicPotion;
 /**
  * 
  */
-abstract class Model {
+abstract class Model extends Object{
 	protected $db;
 	protected $uri;
 	protected $logger;
@@ -35,5 +35,5 @@ abstract class Model {
 }
 
 /**
- * EOF /
+ * EOF /system/model.php
  */

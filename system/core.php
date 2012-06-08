@@ -14,10 +14,15 @@ namespace MagicPotion;
 
 include(ROOT.'/system/import.php');
 
+import('sys.object');
 import('sys.helper');
 import('inc.config');
 import('inc.error');
 import('inc.logger');
+
+import('sys.magicpotion');
+import('sys.defines');
+
 
 /**
  * Exception handler.
@@ -89,11 +94,14 @@ function import($str)
 }
 
 
+/**
+ * Wrapper for the logger to make it global within the namespace.
+ */
 function log_msg($str)
 {
 	
 }
 
 /**
- * EOF: /system/core.php
+ * EOF /system/core.php
  */

@@ -16,7 +16,7 @@ use MagicPotion\Helper;
  * Includes
  */
 
-#Helper::import('inc.factory');
+#import('inc.factory');
 import('inc.error');
 import('inc.logger');
 import('inc.config');
@@ -28,29 +28,28 @@ import('inc.rewrite');
 import('inc.template');
 import('inc.auth');
 
-#Helper::import('inc.builder');
-#Helper::import('inc.upload');
-#Helper::import('inc.syndication');
-#Helper::import('inc.bbcode');
+#import('inc.builder');
+#import('inc.upload');
+#import('inc.syndication');
+#import('inc.bbcode');
 
 /**
  * Components
  */
-#Helper::import('com.news.controller');
+#import('com.news.controller');
 
 /**
  * Modules
  */
-#Helper::import('mod.auth.class');
-#Helper::import('mod.user.class');
-#Helper::import('mod.info.class');
-#Helper::import('mod.comic.class');
-#Helper::import('mod.forum.class');
-#Helper::import('mod.chan.class');
-#Helper::import('mod.chat.class');
-#Helper::import('mod.gallery.class');
-
+#import('mod.auth.class');
+#import('mod.user.class');
+#import('mod.info.class');
+#import('mod.comic.class');
+#import('mod.forum.class');
+#import('mod.chan.class');
+#import('mod.chat.class');
+#import('mod.gallery.class');
 
 /**
- * EOF /application/includes.php
+ * EOF /system/includes.php
  */

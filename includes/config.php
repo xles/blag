@@ -65,6 +65,7 @@ class Config {
 		return $vars;
 	}
 }
+
 /**
- * EOF /
+ * EOF /includes/config.php
  */

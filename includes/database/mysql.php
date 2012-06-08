@@ -128,6 +128,7 @@ class Mysql implements \MagicPotion\iDatabase {
 		/* Connect to MySQL server? */
 	}
 }
+
 /**
- * EOF /inc/db/mysql.php
+ * EOF /includes/database/mysql.php
  */

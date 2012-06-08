@@ -123,5 +123,5 @@ class Router {
 }
 
 /**
- * EOF includes/router.php
+ * EOF /includes/router.php
  */

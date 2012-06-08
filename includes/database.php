@@ -178,6 +178,7 @@ class Database {
 	
 	}
 }
+
 /**
- * EOF /inc/db.php
+ * EOF /includes/database.php
  */

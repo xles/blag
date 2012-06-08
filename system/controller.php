@@ -17,7 +17,7 @@ namespace MagicPotion;
 /**
  * 
  */
-abstract class Controller {
+abstract class Controller extends Object {
 	protected $uri;
 	protected $logger;
 	protected $auth;
@@ -55,5 +55,5 @@ abstract class Controller {
 }
 
 /**
- * EOF /
+ * EOF /system/controller.php
  */

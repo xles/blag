@@ -77,6 +77,7 @@ class Locale {
 		return $vars;
 	}
 }
+
 /**
- * EOF /inc/locale.php
+ * EOF /includes/locale.php
  */

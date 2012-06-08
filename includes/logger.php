@@ -165,5 +165,5 @@ class Debugger extends Logger {
 }
 
 /**
- * EOF /
+ * EOF /includes/logger.php
  */

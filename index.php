@@ -11,6 +11,7 @@
  * @todo make logging global.
  * @todo make errors global.
  * @todo make config global.
+ * @todo make an error page dispatch thingamaboober, that sets HTTP status.
  */
 namespace MagicPotion;
 
@@ -19,9 +20,6 @@ error_reporting(-1);
 define('ROOT', str_replace('\\','/',dirname(__FILE__)));
 
 include(ROOT.'/system/core.php');
-
-import('sys.magicpotion');
-import('sys.defines');
 
 #$logger = Logger::get_instance();
 #$logger->log_msg('Logger initiated');
@@ -37,7 +35,7 @@ $main->route();
 #$logger->log_msg('Application routed, dispatching');
 
 $main->dispatch();
-#$logger->log_msg('Application dispatched, executing');
+#$log->msg('Application dispatched, executing');
 
 $main->run();
 #$logger->log_msg('Application execution completed');
@@ -45,7 +43,6 @@ $main->run();
 $main->__destruct();
 #$logger->debugger();
 
-print 'teapot';
 exit;
 /**
  * EOF /index.php

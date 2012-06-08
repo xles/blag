@@ -29,6 +29,7 @@ $copyright = NL.'Powered by Magic Potion&trade;.
 Copyright <a href="http://web.mirakulix.org/">mirakulix.org</a>
 &copy; 2005-2012.'.NL;
 define('COPYRIGHT',$copyright);
+
 /**
- * EOF /
+ * EOF /system/defines.php
  */

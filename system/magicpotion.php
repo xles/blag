@@ -19,7 +19,7 @@ namespace MagicPotion;
  *
  * @author xles
  */
-class MagicPotion {
+class MagicPotion extends Object {
 	private $start;
 	private $router;
 	private $logger;
@@ -50,9 +50,6 @@ class MagicPotion {
 	{
 		$this->logger->log_line('Initiating application');
 		
-		/**
-		 * Including libraries.
-		 */
 		import('sys.controller');
 		import('sys.model');
 		import('sys.view');
@@ -156,5 +153,5 @@ class MagicPotion {
 }
 
 /**
- * EOF /application/application.php
+ * EOF /system/magicpotion.php
  */

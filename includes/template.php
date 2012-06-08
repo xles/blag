@@ -287,5 +287,5 @@ class Template {
 	}
 }
 /**
- * EOF /
+ * EOF /includes/template.php
  */

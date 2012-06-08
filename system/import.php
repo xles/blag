@@ -3,6 +3,7 @@ namespace MagicPotion;
 
 class importException extends \Exception {}
 
+#class Import extends Object {
 class Import {
 	public function import($str)
 	{
@@ -143,5 +144,5 @@ class Import {
 
 }
 /**
- * EOF: system/import.php
+ * EOF /system/import.php
  */

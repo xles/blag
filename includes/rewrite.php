@@ -88,5 +88,5 @@ class Rewrite {
 	}
 }
 /**
- * EOF /inc/rewrite.php
+ * EOF /includes/rewrite.php
  */

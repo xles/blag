@@ -41,5 +41,5 @@ class BlagPageView extends View {
 }
 
 /**
- * EOF /
+ * EOF /components/blag/views/page.php
  */

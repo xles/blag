@@ -4,7 +4,7 @@ namespace MagicPotion;
 /**
  * 
  */
-abstract class View {
+abstract class View extends Object {
 	protected $vars = array();
 	protected $logger;
 	protected $tpl;
@@ -18,5 +18,5 @@ abstract class View {
 }
 
 /**
- * EOF /
+ * EOF /system/view.php
  */

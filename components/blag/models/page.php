@@ -25,5 +25,5 @@ class BlagPageModel extends Model {
 }
 
 /**
- * EOF /
+ * EOF /components/blag/models/page.php
  */

@@ -394,5 +394,5 @@ class Auth {
 }
 	
 /**
- * EOF /modules/auth/class.php
+ * EOF /includes/auth.php
  */

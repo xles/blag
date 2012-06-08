@@ -56,6 +56,5 @@ class BlagController extends Controller {
 }
 
 /**
- * EOF components/user/controller.php
+ * EOF /components/blag.php
  */
- 

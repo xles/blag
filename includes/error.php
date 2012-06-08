@@ -28,5 +28,5 @@ class Error extends \Exception {
 }
 
 /**
- * EOF /inc/error.php
+ * EOF /includes/error.php
  */
