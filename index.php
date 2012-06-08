@@ -10,8 +10,7 @@
  * @todo make import global.
  * @todo make logging global.
  * @todo make errors global.
- * 
- * 
+ * @todo make config global.
  */
 namespace MagicPotion;
 
@@ -19,24 +18,10 @@ error_reporting(-1);
 
 define('ROOT', str_replace('\\','/',dirname(__FILE__)));
 
-include(ROOT.'/system/helper.php');
-/**
- * import files elegantly
- */
-function import($str)
-{
-	$helper = new Import();
-	return $helper->import($str);
-}
-
-
-function log_msg($str)
-{
-	
-}
-
+include(ROOT.'/system/core.php');
 
 import('sys.magicpotion');
+import('sys.defines');
 
 #$logger = Logger::get_instance();
 #$logger->log_msg('Logger initiated');

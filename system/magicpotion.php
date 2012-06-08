@@ -14,13 +14,6 @@
 // </editor-fold>
 namespace MagicPotion;
 
-//include_once(ROOT.'/system/helper.php');
-
-import('sys.defines');
-import('inc.config');
-import('inc.error');
-import('inc.logger');
-
 /**
  * Description of application
  *
@@ -46,9 +39,9 @@ class MagicPotion {
 		if(DEBUG)
 			$this->start = microtime();
 		
-		set_exception_handler(array(new Error,'exception_handler'));
+		set_exception_handler('MagicPotion\\exception_handler');
 
-		set_error_handler(array(new Error,'error_handler'));
+		set_error_handler('MagicPotion\\error_handler');
 		
 		$this->logger = Logger::get_instance();
 	}
@@ -78,8 +71,8 @@ class MagicPotion {
 		$this->router = new Router();
 		
 		$tpl_path = 'templates/'.$config->get('template');
-		define('TPL_ROOT', ROOT.DIRECTORY_SEPARATOR.$tpl_path);
-		define('TPL_BASE', BASEPATH.DIRECTORY_SEPARATOR.$tpl_path);
+		define('TPL_ROOT', ROOT.'/'.$tpl_path);
+		define('TPL_BASE', BASEPATH.'/'.$tpl_path);
 
 		$this->session->set('UID', 1);
 		$this->session->set('USERNAME', 'xles');

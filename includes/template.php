@@ -261,7 +261,7 @@ class Template {
 
 		try {
 			ob_start();
-			Helper::import($str);
+			import($str);
 			$buffer = ob_get_contents();
 			ob_end_clean();
 			$this->buffer = $buffer;
