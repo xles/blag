@@ -1,16 +1,7 @@
 <!-- Start component model -->
 			<div class="row show-grid">
 				<div class="span9">
-					<div class="form-actions">
-						<div class="pull-right"> 
-						<button type="submit" class="btn btn-primary">{@Keep_draft}</button>
-						<button class="btn btn-danger">{@Remove_post}</button>
-						<button class="btn btn-warning" disabled title="{@Not_authorized}">{@Publish}</button>
-						</div>
-					</div>
-					{/components/blag/view}
-					<hr>
-					<h3>{@Edit_post}</h3>
+					<h3>{@New_post}</h3>
 			<form class="form-vertical">
 				<fieldset>
 					<div class="control-group">
@@ -21,7 +12,7 @@
 					</div>
 					<div class="control-group">
 						<div class="controls">
-							<textarea class="input-xlarge ckeditor" id="textarea" name="moot">{body}</textarea>
+							<textarea class="input-xlarge ckeditor" id="textarea" name="moot"></textarea>
 						</div>
 					</div>
 					<div class="control-group">
@@ -57,9 +48,32 @@
 					</div>
 				</fieldset>
 			</form>
-					</div>
+				</div>
 				<div class="span3">
-					<?php include('html/sidebar.html'); ?>
+					{:if loggedin}
+					{usernav}
+					{:endif}
+					<dl>
+						<dt>{@Archive}</dt>
+						<dd>
+							{archive}
+						</dd>
+					</dl>
+					<hr>
+					<dl>
+						<dt>{@Categories}</dt>
+						<dd>
+							{categories}
+						</dd>
+					</dl>
+					<hr>
+					<dl>
+						<dt>{@Tags}</dt>
+						<dd style="text-align:left;">
+							{tags}
+						</dd>
+					</dl>
+					{/components/blag/sidebar}
 				</div>
 			</div>
 <!-- End component model -->

@@ -21,10 +21,87 @@ class BlagPageModel extends BlagModel {
 	public function list_posts()
 	{
 		$this->db->table = 'posts';
-		#$vars = array('letter');
-		#$condition = "WHERE hash = '$hash'";
-		$db = $this->db->select();
-		return $db;
+		$c = $this->db->select(
+					array('COUNT(*)'),
+					'WHERE published = 1'
+				);
+		$vars = array(	'post_id',
+				'title',
+				'alias',
+				'text',
+				'author',
+				'pubdate',
+				'category_id'
+			);
+		$db = $this->db->select(
+					$vars,
+					'WHERE published = 1',
+					'pubdate DESC',5
+				);
+
+		if($c['COUNT(*)'] == 0)
+			return false;
+
+		if($c['COUNT(*)'] == 1)
+			$db = array($db);
+
+		$posts = array();
+		foreach ($db as $tmp) {
+			$post['title'] = $tmp['title'];
+			$post['url'] = $this->uri->format_URL(
+				'blag/post/'.$tmp['alias']);
+			$post['author_profile'] = $this->uri->format_URL(
+				'user/profile/'.$tmp['author']);
+			$this->db->table = 'users';
+			$u = $this->db->select(array('username'),
+				'WHERE user_id = '.$tmp['author']);
+			$post['author'] = $u['username'];
+			$this->db->table = 'categories';
+			$c = $this->db->select(array('title','alias'),
+				'WHERE category_id = '.$tmp['category_id']);
+			$post['category'] = $c['title'];
+			$post['category_url'] = $this->uri->format_URL(
+				'blag/category/'.$c['alias']);
+			$post['date_iso'] = date('c',$tmp['pubdate']);
+			$post['date'] = date('r',$tmp['pubdate']);
+			$post['summary'] = $this->summary($tmp['text']);
+			$posts[] = $post;
+		}
+
+
+
+		return $posts;
+	}
+	private function count_pages($type)
+	{
+		switch($type) {
+			case 'tag':
+
+				break;
+			case 'category':
+
+				break;
+			case 'page':
+			default:
+				
+				break;
+		}
+	}
+	public function page_next()
+	{
+		$uri = $this->uri->parse_URL('b/m/page');
+		$page = $uri['page'];
+		if(empty($page) || !is_int($page))
+			return false;
+
+		$pages = $this->count_pages($uri['m']);
+
+
+		return false;
+	}
+	public function page_prev()
+	{
+		return false;
 	}
 	public function summary($str,$link = FALSE)
 	{

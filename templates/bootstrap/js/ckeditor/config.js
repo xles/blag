@@ -9,6 +9,28 @@ CKEDITOR.editorConfig = function( config )
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
 	config.skin = 'BootstrapCK-Skin';
-	config.toolbar = 'Basic';
+	//config.toolbar = 'Basic';
+
+/* Main post toolbar
+	config.toolbar =
+		[
+			['Source','-','Undo','Redo'],
+			['Link', 'Unlink', 'Image'],
+			['NumberedList','BulletedList','-','Blockquote'],
+			'/',
+			['Format','RemoveFormat'],
+			['Bold', 'Italic','Underline','StrikeThrough','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','Subscript','Superscript']
+		];
+*/
+
+/* Comment toolbar */
+	config.extraPlugins = 'bbcode';
+	config.toolbar =
+		[
+			['Source'],
+			['Bold', 'Italic','Underline','StrikeThrough','RemoveFormat'],
+			['Link', 'Unlink','Blockquote'],
+		];
 
 };
+

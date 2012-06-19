@@ -4,6 +4,7 @@ config/*
 !config/*.default.*
 
 libraries/twitter*
+libraries/iWebKit*
 
 
 # Compiled source #

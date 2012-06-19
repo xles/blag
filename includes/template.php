@@ -48,6 +48,7 @@ class Template extends Object {
 	
 	public function set_component($component, $section = FALSE)
 	{
+		$this->log->log_line('component set to '.$component);
 		$this->lang->set_component($component, $section);
 	}
 

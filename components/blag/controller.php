@@ -32,6 +32,14 @@ class BlagController extends Controller {
 			case 'post':
 				$content = $this->post();
 				break;
+			case 'edit':
+				$content = $this->edit();
+				break;
+			case 'new':
+				$content = $this->compose();
+				break;
+			case 'category':
+			case 'tag':
 			case 'page':
 			default:
 				$content = $this->page();
@@ -47,13 +55,28 @@ class BlagController extends Controller {
 			throw new controller;
 		}
 	}
+	private function compose()
+	{
+		#$m = $this->load_model(__FUNCTION__);
+		$v = $this->load_view(__FUNCTION__);
+		$v->bind('tags','moot');
+		return $v->output();
+	}
+	private function edit()
+	{
+		#$m = $this->load_model(__FUNCTION__);
+		$v = $this->load_view(__FUNCTION__);
+		return $v->output();
+	}
 	
 	private function page()
 	{
 		$m = $this->load_model(__FUNCTION__);
 		$v = $this->load_view(__FUNCTION__);
 		#$v->bind('method',print_r($m->list_posts(), true));
-		$v->bind('method',$m->get_username(1));
+		$v->bind('posts',$m->list_posts());
+		$v->bind('next_url',$m->page_next());
+		$v->bind('prev_url',$m->page_prev());
 		return $v->output();
 #		return $_SESSION['USERNAME'];
 	}
